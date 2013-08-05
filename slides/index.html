@@ -1,0 +1,701 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>Processing Intro</title>
+
+        <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+        <meta name="author" content="Hakim El Hattab">
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="stylesheet" href="css/reveal.min.css">
+        <link rel="stylesheet" href="css/theme/night.css" id="theme">
+
+        <!-- For syntax highlighting -->
+        <link rel="stylesheet" href="lib/css/zenburn.css">
+
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+            document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <div class="reveal">
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+                <section>
+                    <h3>Getting Started with Processing</h3>
+                    <p>
+                        <small>Clay Heaton | 06 Aug 2013</small>
+                    </p>
+                </section>
+
+                <section>
+                    <h3>Processing is a superset of Java</h3>
+                    <p>
+                        Everything that you can do in Java, you can do in Processing, and then some.
+                    </p>
+                </section>
+
+                <section>
+                    <h3>Typical computer coordinate systems</h3>
+                    <p>
+                        The y-axis is reversed. Zero is at the top. <br />The origin (0,0) is at the top-left.
+                    </p>
+                    <img width="436" height="253" src="img/coords.png" alt="Coordinate System">
+                </section>
+                <section data-markdown>
+                        <script type="text/template">
+                            ### The very basics
+
+                            <ul>
+                                <li>Every line ends with a semicolon: `;`</li>
+                                <li>Comment out lines with `//` or `/* code */`</li>
+                                <li>A variable is **not** the same as in SAS!</li>
+                            </ul>
+
+                            ```
+                            // This is a comment. It doesn't need to end with a semicolon
+
+                            /*
+                                This is
+                                a multi-line
+                                comment.
+                                Just like SAS.
+                            */
+                            ```
+                        </script>
+                </section>
+                <section data-markdown>
+                        <script type="text/template">
+                            ### Debug by printing to the log
+
+                            <ul><li>Use the `print()` function</li>
+                                <li>For a line break, use `\n` within quotes</li></ul>
+
+                            ```
+                            // The incorrect approach
+                            print(12);
+                            print("My favorite number is: " + 12);
+                            print("What is yours?");
+                            print("It is " + 13 + ".");  
+
+                            // The log shows: 12My favorite number is: 12What is yours?It is 13.
+
+                            // The proper approach
+                            print(12 + "\n");
+                            print("My favorite number is: " + 12 + "\n");
+                            print("What is yours?\n");
+                            print("It is " + 13 + ".\n");
+
+                            /* The log shows:
+                                12
+                                My favorite number is: 12
+                                What is yours?
+                                It is 13.
+                            */
+                            ```
+                        </script>
+                </section>
+
+                <section data-markdown>
+                        <script type="text/template">
+                            ### Assignment vs. Equality Operators
+
+                            <ul>
+                                <li>The assignment operator: `=`</li>
+                                <li>The equality operator:   `==`</li>
+                            </ul>
+
+                            ```
+                            int a = 1; /* Set the value of the integer variable, called a, to 1. */
+                            if (a == 1) {...} /* Check if the value of a is equal to 1. */
+
+                            ```
+                            <p>Note that `a = 1` always returns true...
+                            ```
+                            if (a = 1) {...} /* This will always be true. */
+                            ```
+                        </script>
+                </section>
+                
+                <!-- Example of nested vertical slides -->
+                <section>
+                    <section>
+                        <h2>Data Types</h2>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Boolean
+
+                            <p>Takes a true or false value.</p>
+
+                            ```
+                            /* Initialize the variable and set its value to false */
+
+                            boolean is_complete = false;
+
+                            /* Set the value of is_complete to true */
+
+                            is_complete = true;
+                            ```
+                            <p>You can check the value like this:
+                            ```
+                            if (is_complete) { /* do something */ }
+
+                            if (is_complete == true) { /* do something */ }
+                            ```
+                            <p>Check if it is false like this:
+                            ```
+                            if (!is_complete) { /* do something */ }
+
+                            if (is_complete == false) { /* do something */ }
+                            ```
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Byte
+
+                            <ul>
+                                <li>Min value of `-128`</li>
+                                <li>Max value of  `127` (inclusive)</li>
+                                <li>No decimal points!! Only whole numbers.</li>
+                            </ul>
+
+                            ```
+                            byte count;
+                            byte count = 1;
+
+                            if (count == 1) { ... }
+
+                            byte count =  1.1;  // ERROR: cannot convert from float to byte   
+                            byte count = -1;    // count -> -1
+                            byte count =  130;  // ERROR: cannot convert from int to byte
+                            ```
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Casting
+                            <ul>
+                                <li>Casting is inline data type conversion. Put the type to which you wish to convert in parenthesis in front of the variable or value that you are converting.</li>
+                                <li>Processing *always* must know the data type of each variable.</li> 
+                                <li>Because you cannot implicitly switch types on the fly, Processing (and Java) are called 'statically typed' languages.</li>
+                            </ul>
+                            ```
+                            byte count = (byte)1.1; // Cast a numeric value
+                            print(count); // Log shows: 1
+
+                            float a = 12.3;
+                            count = (byte)a; // Cast the value of variable 'a' and assign it to 'count'.
+
+                            print(a);     // Log shows: 12.3
+                            print(count); // Log shows: 12
+
+                            byte count = (byte)130; // ???  What do you think will happen? (Max byte is 127...)
+                            ```
+                            <small>Other languages, such as python and ruby, allow implicit type switching on the fly. <br />These are called 'dynamically typed' languages.</small>
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Rollover
+                            <p>Exceed the max value and it rolls over to the min value.</p>
+                            <p>This is your only warning! Processing will not warn you.</p>
+                            ```
+                            byte count = (byte)1.1; // count -> 1
+                            byte count =       130; // ERROR: cannot convert from int to byte
+                            byte count = (byte)130; // count -> -126
+                            ```
+                            <small>Think of this like the odometer in your car rolling over from 999,999 to 0.</small>
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Short
+
+                            <ul>
+                                <li>Min value of `-32,768`</li>
+                                <li>Max value of  `32,767` (inclusive)</li>
+                                <li>No decimal points!! Only whole numbers.</li>
+                            </ul>
+
+                            ```
+                            short count;
+                            short count = 1;
+
+                            if (count == 1) { ... }
+
+                            short count =  16576;
+                            short count = -39989; // What happens here?
+                            ```
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Integer
+
+                            <ul>
+                                <li>Min value of `-2,147,483,648`</li>
+                                <li>Max value of  ` 2,147,483,647` (inclusive)</li>
+                                <li>No decimal points! Only whole numbers.</li>
+                            </ul>
+
+                            ```
+                            int count;
+                            int count = 1;
+
+                            if (count == 1) { ... }
+
+                            int count =      1.1;  // ERROR: cannot convert from float to int
+                            int count = (int)1.1;  // count -> 1
+                            int count =      848;  // count ->  848
+                            int count =     -130;  // count -> -130
+                            ```
+
+                            *Be careful* if you are working with large numbers <br />(like the population of the world, for instance)!
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Long
+
+                            <ul>
+                                <li>Min value of `-9,223,372,036,854,775,808`</li>
+                                <li>Max value of  ` 9,223,372,036,854,775,807` (inclusive)</li>
+                                <li>No decimal points! Only whole numbers.</li>
+                                <li>If you need something larger, look to the Java [BigInteger](http://docs.oracle.com/javase/7/docs/api/java/math/BigInteger.html) class.
+                            </ul>
+
+                            ```
+                            long count = 7656786532;
+                            ```
+                            <small>In other languages, you will see types such as `unsigned long`. These are 64 bit numbers that only allow positive values. The range would be from 0 to 2x the max of the `long`, as displayed above. Some other languages have a `long long` and `unsigned long long` type.</small>
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Float
+
+                            <ul>
+                                <li>Range is large; explanation is complicated. Google it.</li>
+                            </ul>
+
+                            ```
+                            float scale;
+                            float scale = 1.444;
+
+                            if (scale > 1.5) { ... }
+
+                            float scale = 1;    // scale -> 1.0 
+                            float scale = 1.5;  // scale -> 1.5
+                            float scale = 1.99; // scale -> 1.99
+
+                            // What is the value of c be?
+                            int a = 22;
+                            int b = 7;
+
+                            float c = a / b;                         
+
+                            print(c);
+                            ```
+                            **Never** use floats for *precise* values, such as currency. For that, you will need to use the `java.math.BigDecimal` class.<br />
+                        </script>
+                    </section>
+                    <section>
+                        <p>Floating point numbers use binary fractions and not decimal fractions. That is, you're used to decimal fractions made up of a tenths digit, a hundredths digit, a thousandths digit, etc. d1/10 + d2/100 + d3/1000 ... But floating point numbers are in binary, so they have a half digit, a quarter digit, an eighth digit, etc. d1/2 + d2/4 + d3/8 ...</p>
+
+                        <p>Many decimal fractions cannot be expressed exactly in any finite number of binary digits. For example, 1/2 is no problem: in decimal it's .5, in binary it's .1. 3/4 is decimal .75, binary .11. But 1/10 is a clean .1 in decimal, but in binary it's .0001100110011... with the "0011" repeating forever. As the computer can store only a finite number of digits, at some point this has to get chopped off, so the answer is not precise. When we convert back to decimal on output, we get a strange-looking number.</p>
+                        <small><a href="http://stackoverflow.com/questions/1661273/floating-point-arithmetic-not-producing-exact-results-in-java">More information at Stack Overflow</a></small>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Double
+
+                            <ul>
+                                <li>Range is twice that of a float; equally complicated explanation.</li>
+                            </ul>
+
+                            ```
+                            double scale = 12345.6789;
+
+                            if (scale > 200.00003) { ... }
+
+                            double scale = 1;    // scale -> 1.0 
+                            double scale = 1.5;  // scale -> 1.5
+                            double scale = 1.99; // scale -> 1.99
+
+                            // etc...
+                            ```
+                            Like floats, **never** use for *precise* values, such as currency. For that, you will need to use the `java.math.BigDecimal` class.<br />
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Char
+
+                            <ul>
+                                <li>Holds a single 16-bit Unicode character.</li>
+                                <li>Always define chars with single-quotes.</li>
+                            </ul>
+
+                            ```
+                            char myLetter = 'a'; // Single quotes
+
+                            if(myLetter == 'a') { print("correct"); }
+                            ```
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### String
+
+                            <ul>
+                                <li>A String is an sequence of characters.</li>
+                                <li>Always define strings with double-quotes.</li>
+                                <li>Strings are objects...</li>
+                            </ul>
+
+                            ```
+                            String hisName = "Kelly"; // Double quotes
+                            String herName = "Kelly";
+
+                            // What will happen here?
+                            if (hisName == herName) {
+                                print("Equal.");
+                            } else {
+                                print("Not equal.");
+                            }
+
+                            // What about here?
+                            if (hisName.equals(herName)) {
+                                print("Equal.");
+                            } else {
+                                print("Not equal.");
+                            }
+                            ```
+                            <small>A String is an Object, so comparing them with the == operator only compares whether both Strings are stored in the same memory location. Using the equals() method will ensure that the actual contents are compared.</small>
+                        </script>
+                    </section>
+                </section>
+                <section data-markdown>
+                        <script type="text/template">
+                            ### Unfamiliar operators
+
+                            ```
+                            int i = 1;  // value of i: 1
+                            i += 1;     // value of i: 2;  same as i = i + 1;
+                            i -= 1;     // value of i: 1;  same as i = i - 1;
+                            i *= 5;     // value of i: 5;  same as i = i * 5;
+                            i /= 5;     // value of i: 1;  same as i = i / 5;
+
+                            i++;        // value of i: 2;  same as i = i + 1;
+                            i--;        // value of i: 1;  same as i = i - 1;
+
+                            // CAREFUL!
+
+                            --i;        // valid, similar to i = i - 1; evaluated in reverse order
+                            ++i;        // valid, similar to i = i + 1; evaluated in reverse order
+                            ```
+
+                            ```
+                            int i = 20;
+                            print(i % 5); // Log shows: 0
+
+                            i = 21;
+                            print(i % 5); // Log shows: 1
+
+                            i = 22;
+                            print(i % 5); // Log shows: 2
+
+                            i = 23;
+                            print(i % 5); // Los shows: 3
+
+                            i = 24;
+                            print(i % 5); // Log shows: 4
+
+                            i = 25;
+                            print(i % 5); // Log shows: 0
+                            ```
+                        </script>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Flow Control</h2>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### IF - THEN - ELSE
+
+                            ```
+                            if (something to evaluate) {
+                                // Do this if it is true
+                            } else {
+                                // Do this if it is false
+                            }
+
+                            if (something to evaluate) {
+                                // Do this if it is true
+                            } else if (something else to evaluate) {
+                                // Do this if the first statement is false
+                                // and the second statement is true
+                            } else {
+                                // Do this if neither of the first two are true
+                            }
+                            ```
+                            Using && for "and"...
+                            ```
+                            if (x < 0 && y < 0) {
+                                // Do something
+                            }
+                            ```
+                            Using || for "or"...
+                            ```
+                            if (x < 0 || y < 0) {
+                                // Do something
+                            }
+                            ```
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Ternary operator
+
+                            <ul>
+                                <li> `a ? b : c`</li>
+                                <li>Nothing but shorthand for a simple IF-ELSE statement</li>
+                            </ul>
+
+                            ```
+                            int myVar = 42;
+
+                            if (myVar > 0) {
+                                myVar = 0;
+                            } else {
+                                myVar = abs(myVar);
+                            }
+
+                            // Using the ternary operator
+                            myVar > 0 ? myVar = 0 : myVar = abs(myVar);
+                            
+                            ```
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### The Switch statement
+
+                            <ul>
+                                <li>Cleaner way of writing a lot of if-then-else statements.</li>
+                            </ul>
+
+                            ```
+                            int month = 8;
+                            String monthString;
+                            switch (month) {
+                                case 1:  monthString = "January";
+                                         break;
+                                case 2:  monthString = "February";
+                                         break;
+                                case 3:  monthString = "March";
+                                         break;
+                                
+                                ...
+
+                                case 8:  monthString = "August";
+                                         break;
+
+                                ...
+                            }
+                            print(monthString); // Log shows "August"
+                            
+                            ```
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### For loops
+
+                            ```
+                            for (int i = 0; i < 20; i++) {
+                                print(i + "\n");
+                            }
+
+                            ```
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### For loops with continue
+                            <p>Use `continue` to skip the remainder of a loop iteration.</p>
+
+                            ```
+                            for (int i = 0; i < 20; i++) {
+                                if (i % 3 == 0) {
+                                    continue;
+                                }
+                                print(i + "\n");
+                            }
+
+                            ```
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### For loops with break
+                            <p>Use `break` to jump out of the loop completely and continue executing the code that follows the loop.</p>
+
+                            ```
+                            for (int i = 0; i < 20; i++) {
+                                if (i > 0 && i % 7 == 0) {
+                                    break;
+                                }
+                                print(i + "\n");
+                            }
+
+                            ```
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Loops with while
+                            <p>Iterate until a boolean expression evaluates as false.</p>
+
+                            ```
+                            while(mama_is_cooking) {
+                                // Do stuff
+
+                                if(mama_looses_her_mind) {
+                                    mama_is_cooking = false;
+                                    // Causes the program to exit the while loop
+                                }
+                            }
+
+                            ```
+                            <p>The while loop is only evaluated if the expression is true when it is first evaluates. Here, it would only evaluate if `mama_is_cooking` is true when the program executes to the point of this loop.
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Loops with do-while
+                            <p>Iterate until a boolean expression evaluates as false, but **always** iterate through the loop at least once.</p>
+
+                            ```
+                            do {
+                                // Go crazy
+                            } while (mama_is_cooking);
+
+                            ```
+                        </script>
+                    </section>
+                </section>
+
+                <section data-markdown>
+                        <script type="text/template">
+                            ### Typical Processing sketch flow
+
+                            ```
+                            /* Initialize global variables */
+                            int someVariable = 0;
+
+                            /* Special Setup function: */
+                            void setup() {
+                                /* Do pre-drawing setup here */
+                            }   
+
+                            /* The Draw loop */
+                            void draw() {
+                                /* Draw and run-time processing here. */
+                            }
+                            ```
+                        </script>
+                </section>
+                <section data-markdown>
+                        <script type="text/template">
+                            ### Debug by slowing the framerate
+
+                            <ul><li>Slow things down to understand incremental changes.</li>
+                                <li>Add the `frameRate()` function to `setup()`.
+                            </ul>
+
+                            ```
+                            /* Initialize global variables */
+                            int someVariable = 0;
+
+                            /* Special Setup function: */
+                            void setup() {
+                                /* Do pre-drawing setup here */
+
+                                /* Limit the max framerate to 1 frame per second. */
+                                frameRate(1);
+                            }   
+
+                            /* The Draw loop */
+                            void draw() {
+                                /* Draw and run-time processing here. */
+                            }
+                            ```
+                        </script>
+                </section>
+
+                <section>
+                    <h2>Slides</h2>
+                    <p>
+                        Not a coder? No problem. There's a fully-featured visual editor for authoring these, try it out at <a href="http://slid.es" target="_blank">http://slid.es</a>.
+                    </p>
+                </section>
+
+                
+
+            </div>
+
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.min.js"></script>
+
+        <script>
+
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+
+                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+                // Optional libraries used to extend on reveal.js
+                dependencies: [
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                    { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+                    // { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+                    // { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+                ]
+            });
+
+        </script>
+
+    </body>
+</html>
