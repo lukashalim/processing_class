@@ -44,6 +44,72 @@
                 </section>
 
                 <section>
+                    <section>
+                        <h2>Warm up code</h2>
+                    </section>
+                    <section>
+                        <h2>Step 1: Launch Processing</h2>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## `background(255);`
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## `background(255);`
+                            ## `size(800,600);`
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## `background(255);`
+                            ## `size(800,600);`
+                            ## `fill(#FF0000);`
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## `background(255);`
+                            ## `size(800,600);`
+                            ## `fill(#FF0000);`
+                            ## `rect(100,100,100,100);`
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## `background(255);`
+                            ## `size(800,600);`
+                            ## `fill(#FF0000);`
+                            ## `rect(100,100,100,100);`
+                            ## `fill(#00FF00);`
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## `background(255);`
+                            ## `size(800,600);`
+                            ## `fill(#FF0000);`
+                            ## `rect(100,100,100,100);`
+                            ## `fill(#00FF00);`
+                            ## `ellipse(200,200,100,100);`
+                        </script>
+                    </section>
+                </section>
+
+                <section>
+                    <h3>Goals</h3>
+                    <ul>
+                        <li>Learn basic data types</li>
+                        <li>Learn basic flow control</li>
+                        <li>Learn basic Processing structure</li>
+                        <li>Make stuff move and interact</li>
+                        <li>Learn about Object Oriented Programming</li>
+                        <li>Become familiar enough with Processing to enable further exploration</li>
+                    </ul>
+                </section>
+
+                <section>
                     <h3>Processing is a superset of Java</h3>
                     <p>
                         Everything that you can do in Java, you can do in Processing, and then some.
@@ -391,12 +457,106 @@
                             <small>A String is an Object, so comparing them with the == operator only compares whether both Strings are stored in the same memory location. Using the equals() method will ensure that the actual contents are compared.</small>
                         </script>
                     </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### PVector
+
+                            <ul>
+                                <li>An **Object** type used to store coordinates or vectors</li>
+                            </ul>
+
+                            ``` java
+                            PVector myPoint = new PVector(123,878);
+                            print(myPoint); // [ 123.0, 878.0, 0.0 ]
+                            ```
+                        </script>
+                    </section>
                 </section>
+
+                <section>
+                    <section>
+                        <h2>Colors</h2>
+                    </section>
+                    <section data-markdown>
+                            <script type="text/template">
+                                ### Background color
+                                <p>It is common to set the background color. The most simple way is with the following function:</p>
+
+                                ```
+                                // Draw a white background
+                                background(255);
+
+                                // Draw a black background
+                                background(0);
+                                ```
+                                <p>For simple coloring, use values from 0 to 255 for shades of gray between black and white.</p><br />
+                                <p>Use 3 values for RGB coloring. </p>
+                                ```
+                                // Draw a yellow background
+                                background(255,204,0);
+                                ```
+                                <br />
+                                <p>Use hex colors (common with web development)</p>
+                                ```
+                                background(#ff0000);
+                                ```
+                            </script>
+                    </section>
+                    <section data-markdown>
+                            <script type="text/template">
+                                ### Fill and stroke
+                                <ul>
+                                    <li>Change the fill and stroke color of shapes</li>
+                                    <li>Setting is GLOBAL. You must set these to your desired values prior to drawing each individual shape.</li>
+                                </ul>
+
+                                ```
+                                void setup() {
+                                    size(800,600);
+                                    background(255);
+                                }
+
+                                void draw() {
+                                    // Redraw with each pass
+                                    background(255);
+
+                                    fill(#ff0000);
+                                    stroke(0);
+                                    rect(100,100,100,100);
+
+                                    fill(#305EBF);
+                                    stroke(#ff0000);
+                                    rect(200,200,100,100);
+                                }
+                                
+                                ```
+                            </script>
+                    </section>
+                    <section data-markdown>
+                            <script type="text/template">
+                                ### Transparency (alpha channel)
+                                <p>There are a lot of color/transparency options. Take a look at the Processing help or online docs for more guidance. When setting a color, the transparency level usually is the last parameter.</p><br />
+                                <p>Typically, transparency takes a value from 0 to 255.</p>
+
+                                ```
+                                // Completely transparent fill
+                                fill(#305EBF, 0);             
+
+                                // Completely opaque fill
+                                fill(#305EBF, 255);
+
+                                // 50% transparent fill
+                                fill(#305EBF, 128);                 
+                                ```
+                            </script>
+                    </section>
+                </section>
+
                 <section data-markdown>
                         <script type="text/template">
                             ### Unfamiliar operators
 
-                            ```
+                            ``` java
                             int i = 1;  // value of i: 1
                             i += 1;     // value of i: 2;  same as i = i + 1;
                             i -= 1;     // value of i: 1;  same as i = i - 1;
@@ -411,8 +571,8 @@
                             --i;        // valid, similar to i = i - 1; evaluated in reverse order
                             ++i;        // valid, similar to i = i + 1; evaluated in reverse order
                             ```
-
-                            ```
+                            Modulo / Modulus
+                            ``` java
                             int i = 20;
                             print(i % 5); // Log shows: 0
 
@@ -440,9 +600,9 @@
                     </section>
                     <section data-markdown>
                         <script type="text/template">
-                            ### IF - THEN - ELSE
+                            ### if,  else if,  else
 
-                            ```
+                            ``` java
                             if (something to evaluate) {
                                 // Do this if it is true
                             } else {
@@ -481,7 +641,7 @@
                                 <li>Nothing but shorthand for a simple IF-ELSE statement</li>
                             </ul>
 
-                            ```
+                            ``` java
                             int myVar = 42;
 
                             if (myVar > 0) {
@@ -504,7 +664,7 @@
                                 <li>Cleaner way of writing a lot of if-then-else statements.</li>
                             </ul>
 
-                            ```
+                            ``` java
                             int month = 8;
                             String monthString;
                             switch (month) {
@@ -605,6 +765,93 @@
                     </section>
                 </section>
 
+
+
+                <section>
+                    <section>
+                        <h2>Functions</h2>
+                    </section>
+                    <section data-markdown>
+                            <script type="text/template">
+                                ### Structure of a function
+
+                                ```
+                                // General structure
+
+                                returnType functionName(parameter1Type parameter1, p2Type p2) {
+                                    // Do stuff using the parameters
+
+                                    return value; // Must be of type: returnType
+                                }
+
+                                ```
+                            </script>
+                    </section>
+                    <section data-markdown>
+                            <script type="text/template">
+                                ### Example function 1
+
+                                ```
+                                float sumOfTwoFloats(float a, float b) {
+                                    float c = a + b;
+                                    return c;
+                                }
+
+                                // You would call the function like this:
+
+                                float mySum = sumOfTwoFloats(12.4, 4.5);
+
+                                float x = 1.2;
+                                float y = 6.5;
+                                float z;
+
+                                z = sumOfTwoFloats(x, y);
+                                ```
+                            </script>
+                    </section>
+                    <section data-markdown>
+                            <script type="text/template">
+                                ### Example function 2
+
+                                ```
+                                String monthStringFromNumber(int monthNumber) {
+                                    String answer;
+                                    switch(monthNumber) {
+                                        case 1: answer = "January";
+                                            break;
+                                        case 2: answer = "February";
+                                            break;
+                                        ...
+                                        case 12: answer = "December";
+                                            break;
+                                        default: answer = "Invalid Month";
+                                            break;
+                                    }
+                                    return answer;
+                                }
+
+                                // Call it like this:
+                                String monthName;
+
+                                monthName = monthStringFromNumber(8);
+
+                                ```
+                            </script>
+                    </section>
+                    <section data-markdown>
+                            <script type="text/template">
+                                ### Returning void
+                                <p>Functions do not have to return a value. When they return no value, you write them as if they return `void`.</p>
+
+                                ```
+                                void unPause() {
+                                    paused = false; // Pause would be a global variable
+                                }
+                                ```
+                            </script>
+                    </section>
+                </section>
+                
                 <section data-markdown>
                         <script type="text/template">
                             ### Typical Processing sketch flow
@@ -625,6 +872,25 @@
                             ```
                         </script>
                 </section>
+
+                <section data-markdown>
+                        <script type="text/template">
+                            ### Common setup and draw functions
+
+                            ``` java
+                            void setup() {
+                                size(800,600);   // Change window size to a width of 800, height of 600
+                                background(255); // Initialize the background to white
+                                smooth();        // Turn on anti-aliasing to make round shapes smooth.
+                            }   
+
+                            void draw() {
+                                background(255); // Refresh the background to white before each drawing pass
+                            }
+                            ```
+                        </script>
+                </section>
+
                 <section data-markdown>
                         <script type="text/template">
                             ### Debug by slowing the framerate
