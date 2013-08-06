@@ -150,9 +150,10 @@
                             ### Debug by printing to the log
 
                             <ul><li>Use the `print()` function</li>
-                                <li>For a line break, use `\n` within quotes</li></ul>
+                                <li>For a line break, use `\n` within quotes</li>
+                                <li>... or just use the `println()` function</ul>
 
-                            ```
+                            ``` java
                             // The incorrect approach
                             print(12);
                             print("My favorite number is: " + 12);
@@ -161,11 +162,11 @@
 
                             // The log shows: 12My favorite number is: 12What is yours?It is 13.
 
-                            // The proper approach
-                            print(12 + "\n");
-                            print("My favorite number is: " + 12 + "\n");
-                            print("What is yours?\n");
-                            print("It is " + 13 + ".\n");
+                            // One proper approach
+                            println(12);
+                            println("My favorite number is: " + 12);
+                            println("What is yours?");
+                            println("It is " + 13 + ".");
 
                             /* The log shows:
                                 12
@@ -552,6 +553,58 @@
                     </section>
                 </section>
 
+                <section>
+                    <section>
+                        <h2>Type and Fonts</h2>
+                    </section>
+                    <section data-markdown>
+                            <script type="text/template">
+                                ### Create a font and use it
+                                <p>Not all fonts on your system may be available to use. Keep in mind that if you use this approach and share your sketch with others, they may not have the font you specify.</p>
+
+                                ``` java
+                                PFont f;
+
+                                size(600, 600);
+                                background(255);
+
+                                // Create a font
+                                f = createFont("Miriam", 24);
+
+                                // Sets the font that the text() function will use
+                                textFont(f);
+
+                                fill(0);
+                                textAlign(RIGHT);
+                                text("How are you doing?", width * 0.5, height * 0.25);
+                                ```
+                            </script>
+                    </section>
+                    <section data-markdown>
+                            <script type="text/template">
+                                ### Load a bitmap font
+                                <p>Pre-create bitmap fonts using the "Create font" tool in the Tools menu. You can package this with your sketch to distribute to others.</p>
+
+                                ``` java
+                                PFont f;
+
+                                size(600, 600);
+                                background(255);
+
+                                // Load a pre-created bitmap font
+                                f = loadFont("Miriam-24.vlw");
+
+                                // Sets the font that the text() function will use
+                                textFont(f);
+
+                                fill(0);
+                                textAlign(RIGHT);
+                                text("How are you doing?", width * 0.5, height * 0.25);
+                                ```
+                            </script>
+                    </section>
+                </section
+
                 <section data-markdown>
                         <script type="text/template">
                             ### Unfamiliar operators
@@ -775,15 +828,14 @@
                             <script type="text/template">
                                 ### Structure of a function
 
-                                ```
+                                ``` java
                                 // General structure
 
-                                returnType functionName(parameter1Type parameter1, p2Type p2) {
+                                returnType functionName(type parameter1, type parameter2) {
                                     // Do stuff using the parameters
 
                                     return value; // Must be of type: returnType
                                 }
-
                                 ```
                             </script>
                     </section>
@@ -791,7 +843,7 @@
                             <script type="text/template">
                                 ### Example function 1
 
-                                ```
+                                ``` java
                                 float sumOfTwoFloats(float a, float b) {
                                     float c = a + b;
                                     return c;
@@ -896,36 +948,150 @@
                             ### Debug by slowing the framerate
 
                             <ul><li>Slow things down to understand incremental changes.</li>
-                                <li>Add the `frameRate()` function to `setup()`.
+                                <li>Add the `frameRate()` function to `setup()`.</li>
                             </ul>
 
-                            ```
-                            /* Initialize global variables */
-                            int someVariable = 0;
-
-                            /* Special Setup function: */
+                            ``` java
                             void setup() {
-                                /* Do pre-drawing setup here */
-
-                                /* Limit the max framerate to 1 frame per second. */
+                                // Limit the max framerate to 1 frame per second.
                                 frameRate(1);
                             }   
 
-                            /* The Draw loop */
                             void draw() {
-                                /* Draw and run-time processing here. */
+                                // Do stuff
                             }
                             ```
                         </script>
                 </section>
 
-                <section>
-                    <h2>Slides</h2>
-                    <p>
-                        Not a coder? No problem. There's a fully-featured visual editor for authoring these, try it out at <a href="http://slid.es" target="_blank">http://slid.es</a>.
-                    </p>
+                <section data-markdown>
+                        <script type="text/template">
+                            ### Movement!
+                            <p>Incremental changes in the draw loop</p>
+
+                            ``` java
+                            PVector velocity;
+                            PVector position;
+
+                            void setup() {
+                              size(400, 400);
+
+                              position  = new PVector(width * 0.5, height * 0.5);
+                              velocity  = new PVector(2, 1);
+                              fill(128);
+                              noStroke();
+                            }
+
+                            void draw() {
+                              background(255);
+                             
+                              ellipse(position.x, position.y, 50, 50);
+
+                              position.add(velocity);
+
+                              if (position.x > width || position.x < 0) {
+                                velocity.x *= -1;
+                              }
+
+                              if (position.y > height || position.y < 0) {
+                                velocity.y *= -1;
+                              }
+                            }
+
+                            ```
+                        </script>
                 </section>
 
+                <section>
+                    <section>
+                        <h2>Arrays</h2>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### One-Dimensional Arrays
+                            <p>Arrays are very useful for storing values that you need to access in sequence.</p>
+
+                            ``` java
+                            // Declare an array of ints and assign the initial values.
+                            int[] myValues = {32, 45, 1, 7, 9};
+
+                            for (int i = 0; i < myValues.length; i++) {
+                                println("Hello " + myValues[i]);
+                            }
+
+                            /* The log shows:
+                            Hello 32
+                            Hello 45
+                            Hello 1
+                            Hello 7
+                            Hello 9
+                            */
+
+                            ```
+
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Multi-Dimensional Arrays
+                            <p>Multi-Dimensional arrays are useful, but if you get too far down the array rabbit-hole, you will get confused and lost.</p>
+
+                            ``` java
+                            // Declare an array of ints and assign the initial values.
+                            int[][] myValues = {
+                                                   { 1,  2,  3},
+                                                   {20, 30, 40},
+                                                   { 9,  3,  2}
+                                                };
+
+                            for (int i = 0; i < myValues.length; i++) {
+                                for (int j = 0; j < myValues[i].length; j++) {
+
+                                    // Get value at index j in array at index i in myValues
+                                    int thisValue = myValues[i][j]; 
+
+                                    println("Nested array " + (i+1) + " , value number " + (j + 1) + " , is " + thisValue);
+                                }
+                            }
+
+                            /* The log shows:
+                            Nested array 1 , value number 1 , is 1
+                            Nested array 1 , value number 2 , is 2
+                            Nested array 1 , value number 3 , is 3
+                            Nested array 2 , value number 1 , is 20
+                            Nested array 2 , value number 2 , is 30
+                            Nested array 2 , value number 3 , is 40
+                            Nested array 2 , value number 4 , is 50
+                            Nested array 2 , value number 5 , is 60
+                            Nested array 3 , value number 1 , is 9
+                            Nested array 3 , value number 2 , is 3
+                            */
+
+                            ```
+
+                        </script>
+                    </section>
+                </section>
+                <section data-markdown>
+                        <script type="text/template">
+                            ### Objects & Instances
+                            <p>Like blueprints & houses.</p>
+
+                            ``` java
+                            // The basic form of object declaration
+
+                            class Dog {
+
+                                // The constructor
+                                Dog() {
+
+                                }
+                            }
+
+                            ```
+
+                        </script>
+                </section>
                 
 
             </div>
