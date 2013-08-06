@@ -1004,78 +1004,17 @@
 
                 <section>
                     <section>
-                        <h2>Arrays</h2>
+                        <h2>Objects</h2>
                     </section>
                     <section data-markdown>
                         <script type="text/template">
-                            ### One-Dimensional Arrays
-                            <p>Arrays are very useful for storing values that you need to access in sequence.</p>
-
-                            ``` java
-                            // Declare an array of ints and assign the initial values.
-                            int[] myValues = {32, 45, 1, 7, 9};
-
-                            for (int i = 0; i < myValues.length; i++) {
-                                println("Hello " + myValues[i]);
-                            }
-
-                            /* The log shows:
-                            Hello 32
-                            Hello 45
-                            Hello 1
-                            Hello 7
-                            Hello 9
-                            */
-
-                            ```
-
-                        </script>
-                    </section>
-                    <section data-markdown>
-                        <script type="text/template">
-                            ### Multi-Dimensional Arrays
-                            <p>Multi-Dimensional arrays are useful, but if you get too far down the array rabbit-hole, you will get confused and lost.</p>
-
-                            ``` java
-                            // Declare an array of ints and assign the initial values.
-                            int[][] myValues = {
-                                                   { 1,  2,  3},
-                                                   {20, 30, 40},
-                                                   { 9,  3,  2}
-                                                };
-
-                            for (int i = 0; i < myValues.length; i++) {
-                                for (int j = 0; j < myValues[i].length; j++) {
-
-                                    // Get value at index j in array at index i in myValues
-                                    int thisValue = myValues[i][j]; 
-
-                                    println("Nested array " + (i+1) + " , value number " + (j + 1) + " , is " + thisValue);
-                                }
-                            }
-
-                            /* The log shows:
-                            Nested array 1 , value number 1 , is 1
-                            Nested array 1 , value number 2 , is 2
-                            Nested array 1 , value number 3 , is 3
-                            Nested array 2 , value number 1 , is 20
-                            Nested array 2 , value number 2 , is 30
-                            Nested array 2 , value number 3 , is 40
-                            Nested array 2 , value number 4 , is 50
-                            Nested array 2 , value number 5 , is 60
-                            Nested array 3 , value number 1 , is 9
-                            Nested array 3 , value number 2 , is 3
-                            */
-
-                            ```
-
-                        </script>
-                    </section>
-                </section>
-                <section data-markdown>
-                        <script type="text/template">
-                            ### Objects & Instances
+                            ### Classes & Objects & Instances
                             <p>Like blueprints & houses.</p>
+                            <ul>
+                                <li>If the `class` is Dog...</li>
+                                <li>... an **instance** of the class might be a Poodle.</li>
+                                <li>Data items created from classes are called objects. Basically, you are creating your own data types to handle special cases in your code and to consolidate functions.</li>
+                            </ul>
 
                             ``` java
                             // The basic form of object declaration
@@ -1091,8 +1030,176 @@
                             ```
 
                         </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Initialize objects with constructors
+                            <p>You can have multiple constructors.</p>
+
+                            ``` java
+                            // The basic form of object declaration
+
+                            class Dog {
+                                String type;
+                                // The default constructor
+                                Dog() {
+                                    type = "Mutt";
+                                }
+
+                                // Alternate constructor
+                                Dog(String tempType) {
+                                    type = tempType;
+                                }
+                            }
+
+                            // Create a Dog:
+                            Dog d = new Dog(); // Uses the default constructor
+                            Dog e = new Dog("French Bulldog"); // Uses the other constructor
+
+                            ```
+
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Subclassing
+                            <p>Taxonomies of objects</p>
+                            <ul>
+                                <li>If the `class` is `Animal`...</li>
+                                <li>... and the subclass is `Dog` ...</li>
+                                <li>... an instance of `Dog` might be a Poodle.</li>
+                                <li>The Poodle *inherits* all of the traits of the parent classes.</li>
+                            </ul>
+
+                            ``` java
+                            // The basic form of object declaration
+
+                            class Animal {
+                                float healthLevel;
+                                Animal() {
+                                }
+
+                                void eatFood() {
+                                }
+                            }
+
+                            class Dog extends Animal{
+                                Dog() {
+                                }
+                                void bark() {
+                                }
+                            }
+
+                            // You can do:
+                            myDog.eatFood();
+                            myDog.healthLevel;
+                            myDog.bark();
+
+                            // You cannot do:
+                            myAnimal.bark();
+
+                            ```
+
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Overloading
+                            <p>It is called "overloading" when a subclass overwrites a method (function) of a parent class.</p>
+                            <ul>
+                                <li>Processing looks for a class-specific method first.</li>
+                                <li>Next, it looks for a parent class method.</li>
+                                <li>Finally, it looks for a general function.</li>
+                            </ul>
+
+                            ``` java
+                            // The basic form of object declaration
+
+                            class Animal {
+                                float healthLevel;
+                                Animal() {
+                                }
+
+                                void eatFood() {
+                                }
+                            }
+
+                            class Dog extends Animal{
+                                Dog() {
+                                }
+                                void bark() {
+                                }
+                                void eatFood() {
+                                    healthLevel += 5;
+                                    this.bark();
+                                }
+                            }
+
+                            ```
+
+                        </script>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>ArrayLists</h2>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### ArrayLists are mutable arrays of objects
+                            <p>An ArrayList is a mutable array for objects.</p>
+
+                            ``` java
+                            // Declare the ArrayList and the intention to fill it with Dog objects
+                            ArrayList<Dog> dogs;
+
+                            // Create the empty ArrayList
+                            dogs = new ArrayList<Dog>();
+
+                            // Add new Dog objects to the ArrayList.
+                            // You do not have to declare the Dogs separately.
+                            // They can exist only in the ArrayList.
+                            dogs.add(new Dog("French Bulldog", 5));
+                            dogs.add(new Dog("Poodle", 7));
+                            dogs.add(new Dog());
+
+                            // Retreive something from the ArrayList
+                            Dog frenchie = dogs.get(0);
+                            frenchie.bark();
+
+                            // Remove the Poodle from the ArrayList
+                            dogs.remove(2);
+
+                            ```
+
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### More resizeable lists
+                            <p>Processing provides flexible lists for other types:</p>
+                            <ul>
+                                <li>`IntList`</li>
+                                <li>`FloatList`</li>
+                                <li>`StringList`</li>
+                            </ul>
+
+                        </script>
+                    </section>
                 </section>
                 
+                <section data-markdown>
+                        <script type="text/template">
+                            ### More Resources
+                            <ul>
+                                <li>[Processing website](http://www.processing.org)</li>
+                                <li>[Openprocessing.org](http://www.openprocessing.org)</li>
+                                <li>[Creative Applications](http://www.creativeapplications.net/category/processing/)</li>
+                                <li>[Amnon P5](http://amnonp5.wordpress.com/)</li>
+                                <li>[The Nature of Code](http://natureofcode.com/)</li>
+                        </script>
+                    </section>
 
             </div>
 
